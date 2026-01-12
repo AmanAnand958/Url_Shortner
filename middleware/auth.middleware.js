@@ -12,23 +12,18 @@ import { validateToken } from "../utils/token.js";
  */
 export function authenticationMiddleware(req, res, next) {
     const authHeader = req.headers.authorization;
-    if(!authHeader){
-        return next();
+    if(authHeader && authHeader.startsWith("Bearer ")){
+        const token = authHeader.split(" ")[1];
+        try {
+            const decodedToken = validateToken(token);
+            if(decodedToken){
+                req.user = decodedToken;
+            }
+        } catch (error) {
+            // Token invalid or expired, just continue without user
+        }
     }
-    if(!authHeader.startsWith("Bearer ")){
-        return res.status(400).json({message:"Authorization Header is not valid"});
-    }
-    
-    const token = authHeader.split(" ")[1];
-    
-    const decodedToken = validateToken(token);
-    if(!decodedToken){
-        return res.status(401).json({message:"Unauthorized"});
-    }
-    req.user = decodedToken;
-
     next();
-    
 }
 
 /**

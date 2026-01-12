@@ -131,15 +131,3 @@ Add `Authorization: Bearer <token>` header to protected endpoints.
 See `Routes/url.routes.js` and `Routes/user.routes.js` for full details.
 
 ---
-
-## Contributing
-
-1. Fork the repo and create your branch.
-2. Make your changes and add tests if possible.
-3. Open a pull request describing your changes.
-
----
-
-## License
-
-MIT

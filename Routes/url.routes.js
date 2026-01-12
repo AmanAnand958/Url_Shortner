@@ -12,7 +12,7 @@ import { createShortUrl } from "../services/url.service.js";
 
 router.get('/getallurls',ensureloginMiddleware,async (req,res)=>{
     try {
-        const [urls] = await db.select({url:urlTable.url,shortUrl:urlTable.shortUrl}).from(urlTable).where(eq(urlTable.userId, req.user.id));
+        const urls = await db.select({url:urlTable.url,shortUrl:urlTable.shortUrl}).from(urlTable).where(eq(urlTable.userId, req.user.id));
         return res.status(200).json({urls});    
         
     } catch (error) {

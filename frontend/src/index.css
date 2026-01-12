@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+/* 
+  Tailwind v4 uses @import "tailwindcss"; 
+  We will handle body styles in index.html to avoid @apply issues 
+  until configuration is fully settled.
+*/
