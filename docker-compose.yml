@@ -1,7 +1,4 @@
-# Use postgres/example user/password credentials
-
 services:
-
   db:
     image: postgres
     restart: always
@@ -10,9 +7,29 @@ services:
       POSTGRES_USER: admin
       POSTGRES_DB: shortner_db
     ports:
-      - "5432:5432" 
+      - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgres://admin:admin@db:5432/shortner_db
+      - BASE_URL=http://localhost:80
+      - JWT_SECRET=your_secret_key_change_me
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
 
 volumes:
   pgdata:
