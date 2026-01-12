@@ -6,6 +6,7 @@ export default defineConfig({
   schema: './db/schema.js',
   dialect: 'postgresql',
   dbCredentials: {
+    // Falls back to direct string if process.env isn't populated by dotenv
     url: process.env.DATABASE_URL,
   },
 });
