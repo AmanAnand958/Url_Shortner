@@ -18,7 +18,7 @@ services:
       - "3000:3000"
     environment:
       - DATABASE_URL=postgres://admin:admin@db:5432/shortner_db
-      - BASE_URL=http://localhost:80
+      - BASE_URL=http://13.127.159.68
       - JWT_SECRET=your_secret_key_change_me
     depends_on:
       - db
